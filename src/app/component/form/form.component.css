@@ -1,0 +1,29 @@
+.formClass {
+    background-color: rgb(231, 235, 235);
+    width: 100%;
+    min-height: 300px;
+}
+
+.displayForm {
+    background-color: lightyellow;
+    width: 50%;
+}
+
+.jsonDisplay { 
+    background-color: lightgray;
+    padding-top: 20px; 
+}
+
+.form-group { 
+    width: 34%;
+    padding-left: 2%
+}
+
+select > .placeholder {
+    display: none;
+}
+
+.dropdown {
+    margin-top: 37px;
+    margin-left: 20px
+}

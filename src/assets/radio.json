@@ -1,0 +1,19 @@
+{
+    "label" : "Radio Button",
+    "type" : "radio",
+    "name" : "",
+    "formGroupName" : "",
+    "required" : true,
+    "options" : [
+        {
+            "value" : "True",
+            "label" : "True",
+            "checked" : false
+        },
+        {
+            "value" : "False",
+            "label" : "False",
+            "checked" : false
+        }
+    ]
+}

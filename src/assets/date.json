@@ -1,0 +1,7 @@
+{
+    "label" : "Date",
+    "type" : "date",
+    "name" : "",
+    "formGroupName" : "",
+    "required" : true
+}

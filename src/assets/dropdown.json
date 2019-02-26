@@ -1,0 +1,18 @@
+{
+    "label": "Dropdown",
+    "type": "dropdown",
+    "name": "",
+    "formGroupName" : "",
+    "heading": "Dropdown-List",
+    "required": true,
+    "options": [
+        {
+            "id": "01",
+            "name": "France"
+        },
+        {
+            "id": "02",
+            "name": "Australia"
+        }
+    ]
+}

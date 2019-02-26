@@ -1,0 +1,9 @@
+{
+    "label" : "Password",
+    "type" : "password",
+    "name" : "",
+    "formGroupName" : "",
+    "required" : true,
+    "minLength" : 2,
+    "maxLength" : 10
+}

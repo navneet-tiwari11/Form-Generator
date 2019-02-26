@@ -1,0 +1,19 @@
+{
+    "formName" :[
+        "myForm"
+    ],
+    "formGroup" : [
+        "form"
+    ],
+    "container" : {
+        "myForm" : {
+            "type" : "form",
+            "formData" : {
+                "formTitle" : "Registration Form",
+                "type": "formGroup",
+                "name": "form",
+                "fields" : []
+            }
+        }
+    }
+}

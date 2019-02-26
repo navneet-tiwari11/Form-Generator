@@ -1,0 +1,8 @@
+{
+    "label" : "CheckBox",
+    "type" : "checkbox",
+    "name" : "",
+    "formGroupName" : "",
+    "checkboxName" : "Name_Checkbox",
+    "required" : true
+}

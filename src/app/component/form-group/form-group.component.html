@@ -1,0 +1,64 @@
+<div [formGroup]="form">
+  <div *ngFor="let field of nestedFormGroup" [ngSwitch]="true">
+
+    <div *ngSwitchCase="field.type == 'text' || field.type == 'password'" class="form-group">
+      <label contenteditable="true">{{field.label}}:</label>
+      <input [type]="field.type" [name]="field.name" [class.is-invalid]="form.controls[field.name].invalid && form.controls[field.name].touched"
+        class="form-control" formControlName={{field.name}}>
+      <div class="error" *ngIf="form.controls[field.name].invalid && form.controls[field.name].touched">
+        <small class="text-danger" *ngIf="form.controls[field.name].errors?.required"><sup>*</sup>Required</small>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="field.type == 'checkbox'" class="form-group">
+      <div class="form-check">
+        <label class="form-check-label" contenteditable="true">
+          <input [type]="field.type" [name]="field.name" [value]="field.checkboxName" [class.is-invalid]="form.controls[field.name].invalid && form.controls[field.name].touched"
+            class="form-check-input" formControlName={{field.name}}>{{field.label}}
+        </label>
+      </div>
+      <div class="error" *ngIf="form.controls[field.name].invalid && form.controls[field.name].touched">
+        <small class="text-danger" *ngIf="form.controls[field.name].errors?.required"><sup>*</sup>Required</small>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="field.type == 'radio'" class="form-group">
+      <div class="form-check-inline" *ngFor="let option of field.options">
+        <label class="form-check-label" contenteditable="true">
+          <input [type]="field.type" [name]="field.name" [value]="option.value" [class.is-invalid]="form.controls[field.name].invalid && form.controls[field.name].touched"
+            class="form-check-input" formControlName={{field.name}}>{{option.label}}
+        </label>
+        <div class="error" *ngIf="form.controls[field.name].invalid && form.controls[field.name].touched">
+          <small class="text-danger" *ngIf="form.controls[field.name].errors?.required"><sup>*</sup>Required</small>
+        </div>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="field.type == 'date'" class="form-group">
+      <label contenteditable="true">{{field.label}}:</label>
+      <input [type]="field.type" [name]="field.name" [class.is-invalid]="form.controls[field.name].invalid && form.controls[field.name].touched"
+        class="form-control" formControlName={{field.name}}>
+      <div class="error" *ngIf="form.controls[field.name].invalid && form.controls[field.name].touched">
+        <small class="text-danger" *ngIf="form.controls[field.name].errors?.required"><sup>*</sup>Required</small>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="field.type == 'dropdown'" class="form-group">
+      <label contenteditable="true">{{field.label}}:</label>
+      <select class="form-control" formControlName={{field.name}} [class.is-invalid]="form.controls[field.name].invalid && form.controls[field.name].touched">
+        <option class="placeholder" selected disabled value="">Select language</option>
+        <option *ngFor="let option of field.options" [value]="option.name">{{option.name}}</option>
+      </select>
+      <div class="error" *ngIf="form.controls[field.name].invalid && form.controls[field.name].touched">
+        <small class="text-danger" *ngIf="form.controls[field.name].errors?.required"><sup>*</sup>Required</small>
+      </div>
+    </div>
+
+    <ng-container *ngSwitchCase="field.type == 'formGroup'">
+      <div *ngIf="field.fields.length != 0">
+        <app-form-group [nestedFormGroup]="field.fields" [form]="form.controls[field.name]"></app-form-group>
+      </div>
+    </ng-container>
+
+  </div>
+</div>

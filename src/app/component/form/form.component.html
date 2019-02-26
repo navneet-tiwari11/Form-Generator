@@ -1,0 +1,100 @@
+<div class="btn-group">
+  <button type="button" class="form" (click)="generateForm()">Form</button>
+  <button type="button" (click)="generateFormGroup()">FormGroup</button>
+  <button type="button" (click)="generateTextBox()">TextBox</button>
+  <button type="button" (click)="generatePassTextBox()">Password</button>
+  <button type="button" (click)="generateCheckBox()">CheckBox</button>
+  <button type="button" (click)="generateRadioButton()">RadioButton</button>
+  <button type="button" (click)="generateDate()">DatePicker</button>
+  <button type="button" (click)="generateDropDown()">DropDown</button> 
+  <select class="form-control dropdown" *ngIf="formJsonData" (change)="selectChangeHandler($event)">
+    <option class="placeholder" selected disabled value="">Select FormGroup</option>
+    <option *ngFor="let option of formJsonData.formGroup" [value]="option">{{option}}</option>
+  </select>
+</div>
+
+<div class="container">
+  <ng-container *ngIf="formView">
+    <div class="formClass">
+      <p *ngFor="let item of clickedButton">
+        {{item}}
+      </p>
+    </div>
+  </ng-container>
+  <button class="btn btn-danger" *ngIf="formView" (click)="displayForm()">Generate Form</button>
+  <div class="row" *ngIf="display">
+    <div class="displayForm col-sm-6">
+      <form [formGroup]="form" (ngSubmit)="save(form)" style="padding-top:20px">
+        <div *ngFor="let field of formJsonData.container.myForm.formData.fields" [ngSwitch]="true">
+
+          <div *ngSwitchCase="field.type == 'text' || field.type == 'password'" class="form-group">
+            <label contenteditable="true">{{field.label}}:</label>
+            <input [type]="field.type" [name]="field.name" [class.is-invalid]="form.controls[field.name].invalid && form.controls[field.name].touched"
+              class="form-control" formControlName={{field.name}}>
+            <div class="error" *ngIf="form.controls[field.name].invalid && form.controls[field.name].touched">
+              <small class="text-danger" *ngIf="form.controls[field.name].errors?.required"><sup>*</sup>Required</small>
+            </div>
+          </div>
+
+          <div *ngSwitchCase="field.type == 'checkbox'" class="form-group">
+            <div class="form-check">
+              <label contenteditable="true" class="form-check-label">
+                <input [type]="field.type" [name]="field.name" [value]="field.checkboxName" [class.is-invalid]="form.controls[field.name].invalid && form.controls[field.name].touched"
+                  class="form-check-input" formControlName={{field.name}}>{{field.label}}
+              </label>
+            </div>
+            <div class="error" *ngIf="form.controls[field.name].invalid && form.controls[field.name].touched">
+              <small class="text-danger" *ngIf="form.controls[field.name].errors?.required"><sup>*</sup>Required</small>
+            </div>
+          </div>
+
+
+          <div *ngSwitchCase="field.type == 'radio'" class="form-group">
+            <div class="form-check-inline" *ngFor="let option of field.options">
+              <label class="form-check-label" contenteditable="true">
+                <input [type]="field.type" [name]="field.name" [value]="option.value" [class.is-invalid]="form.controls[field.name].invalid && form.controls[field.name].touched"
+                  class="form-check-input" formControlName={{field.name}}>{{option.label}}
+              </label>
+              <div class="error" *ngIf="form.controls[field.name].invalid && form.controls[field.name].touched">
+                <small class="text-danger" *ngIf="form.controls[field.name].errors?.required"><sup>*</sup>Required</small>
+              </div>
+            </div>
+          </div>
+          <div *ngSwitchCase="field.type == 'date'" class="form-group">
+            <label contenteditable="true">{{field.label}}:</label>
+            <input [type]="field.type" [name]="field.name" [class.is-invalid]="form.controls[field.name].invalid && form.controls[field.name].touched"
+              class="form-control" formControlName={{field.name}}>
+            <div class="error" *ngIf="form.controls[field.name].invalid && form.controls[field.name].touched">
+              <small class="text-danger" *ngIf="form.controls[field.name].errors?.required"><sup>*</sup>Required</small>
+            </div>
+          </div>
+
+          <div *ngSwitchCase="field.type == 'dropdown'" class="form-group">
+            <label contenteditable="true">{{field.label}}:</label>
+            <select class="form-control" formControlName={{field.name}} [class.is-invalid]="form.controls[field.name].invalid && form.controls[field.name].touched">
+              <option class="placeholder" selected disabled value="">Select language</option>
+              <option *ngFor="let option of field.options" [value]="option.name">{{option.name}}</option>
+            </select>
+            <div class="error" *ngIf="form.controls[field.name].invalid && form.controls[field.name].touched">
+              <small class="text-danger" *ngIf="form.controls[field.name].errors?.required"><sup>*</sup>Required</small>
+            </div>
+          </div>
+
+          <ng-template [ngSwitchCase]="field.type == 'formGroup'">
+            <div *ngIf="field.fields.length != 0">
+              <app-form-group [nestedFormGroup]="field.fields" [form]="form.controls[field.name]"></app-form-group>
+            </div>
+          </ng-template>
+
+        </div>
+        <button class="btn btn-secondary" type="submit" [disabled]="!form.valid">Submit</button>
+      </form>
+    </div>
+    <div class="jsonDisplay col-sm-6">
+      <div *ngIf="form">
+        <pre>{{form.value | json}}</pre>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+button {
+    font-family: Arial;
+    background-color: eee;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: hand;
+    border: 2px solid black;
+    margin-bottom: 50px;
+    margin-top: 30px;
+  }
+button.form {
+    color: white;
+    background-color: green;
+  }
+  button:hover {
+    background-color: #cfd8dc;
+  }

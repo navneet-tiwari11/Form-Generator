@@ -1,0 +1,9 @@
+{
+    "label" : "TextBox",
+    "type" : "text",
+    "name" : "",
+    "formGroupName": "",
+    "required" : true,
+    "minLength" : 2,
+    "maxLength" : 10
+}
